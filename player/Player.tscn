@@ -1,15 +1,77 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://player/player.gd" type="Script" id=1]
-[ext_resource path="res://art/Survivor 1/survivor1_stand.png" type="Texture" id=2]
+[ext_resource path="res://art/Survivor 1/survivor1_hold.png" type="Texture" id=2]
 [ext_resource path="res://player/body_movement/state_machine/player_body_state_machine.gd" type="Script" id=3]
 [ext_resource path="res://player/body_movement/states/motion/on_ground/idle.gd" type="Script" id=4]
 [ext_resource path="res://player/body_movement/states/motion/on_ground/move.gd" type="Script" id=5]
+[ext_resource path="res://art/Survivor 1/survivor1_gun.png" type="Texture" id=6]
+[ext_resource path="res://art/Survivor 1/survivor1_silencer.png" type="Texture" id=7]
+[ext_resource path="res://art/Survivor 1/survivor1_stand.png" type="Texture" id=8]
+[ext_resource path="res://art/Survivor 1/survivor1_reload.png" type="Texture" id=9]
+[ext_resource path="res://art/Survivor 1/survivor1_machine.png" type="Texture" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 17.0767, 21.4056 )
+extents = Vector2( 19.9732, 21.4056 )
+
+[sub_resource type="Animation" id=4]
+
+resource_name = "hand_gun"
+length = 0.01
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyPivot/Body:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 6 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+
+resource_name = "hand_gun_silencer"
+length = 0.01
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyPivot/Body:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 7 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+
+resource_name = "hold"
+length = 0.01
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyPivot/Body:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 2 ) ]
+}
 
 [sub_resource type="Animation" id=2]
 
@@ -27,7 +89,45 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 2 ) ]
+"values": [ ExtResource( 8 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+
+resource_name = "load_gun"
+length = 0.01
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyPivot/Body:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 9 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+
+resource_name = "machine_gun"
+length = 0.01
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyPivot/Body:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 10 ) ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -46,7 +146,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 2 ) ]
+"values": [ ExtResource( 8 ) ]
 }
 
 [node name="Player" type="KinematicBody2D" index="0"]
@@ -95,7 +195,12 @@ autoplay = ""
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
+anims/hand_gun = SubResource( 4 )
+anims/hand_gun_silencer = SubResource( 5 )
+anims/hold = SubResource( 6 )
 anims/idle = SubResource( 2 )
+anims/load_gun = SubResource( 7 )
+anims/machine_gun = SubResource( 8 )
 anims/walk = SubResource( 3 )
 blend_times = [  ]
 

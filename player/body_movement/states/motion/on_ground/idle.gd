@@ -1,7 +1,7 @@
 extends "res://player/body_movement/states/motion/on_ground/on_ground.gd"
 
 func enter():
-	handle_animation("idle")
+	handle_animation(owner.animation)
 
 func update(delta):
 	var mouse_position = get_look_position()

@@ -4,7 +4,7 @@ var speed
 
 func enter():
 	speed = 0.0
-	handle_animation("walk")
+	handle_animation(owner.animation)
 
 func update(delta):
 	var mouse_position = get_look_position()
