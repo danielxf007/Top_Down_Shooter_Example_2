@@ -4,7 +4,7 @@ func enter():
 	handle_animation("idle")
 
 func update(delta):
-	var mouse_position = get_global_mouse_position()
+	var mouse_position = get_look_position()
 	update_look_direction(mouse_position)
 	var move_direction = get_move_direction()
 	if is_moving(move_direction):
