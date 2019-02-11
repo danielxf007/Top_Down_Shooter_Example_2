@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://bullets/bullet.gd" type="Script" id=1]
+[ext_resource path="res://art/bullet_set.png" type="Texture" id=2]
+
+[node name="Bullet" type="KinematicBody2D" index="0"]
+
+input_pickable = false
+collision_layer = 16
+collision_mask = 7
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision" ]
+speed = 0.0
+push_force = 0.0
+damage = 0
+
+[node name="Body" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 18, 36, 16, 7 )
+_sections_unfolded = [ "Region" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+

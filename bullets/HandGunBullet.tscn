@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://bullets/Bullet.tscn" type="PackedScene" id=1]
+
+[sub_resource type="CircleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 6.67304
+
+[node name="HandGunBullet" index="0" instance=ExtResource( 1 )]
+
+speed = 300.0
+push_force = 400.0
+damage = 3
+
+[node name="Body" parent="." index="0"]
+
+region_rect = Rect2( 37, 33, 11, 12 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+
+shape = SubResource( 1 )
+
+

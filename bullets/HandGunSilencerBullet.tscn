@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://bullets/Bullet.tscn" type="PackedScene" id=1]
+
+[sub_resource type="CapsuleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 3.22103
+height = 9.35248
+
+[node name="HandGunSilencerBullet" index="0" instance=ExtResource( 1 )]
+
+speed = 450.0
+push_force = 100.0
+damage = 5
+
+[node name="CollisionShape2D" parent="." index="1"]
+
+rotation = 1.5708
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+
