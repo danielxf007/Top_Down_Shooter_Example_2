@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://player/player.gd" type="Script" id=1]
 [ext_resource path="res://art/Survivor 1/survivor1_hold.png" type="Texture" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://art/Survivor 1/survivor1_reload.png" type="Texture" id=9]
 [ext_resource path="res://art/Survivor 1/survivor1_machine.png" type="Texture" id=10]
 [ext_resource path="res://art/Survivor 1/survivor1_stand.png" type="Texture" id=11]
+[ext_resource path="res://art/crossair_black.png" type="Texture" id=12]
+[ext_resource path="res://art/dotGreen.png" type="Texture" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -131,7 +133,7 @@ tracks/0/keys = {
 "values": [ ExtResource( 11 ) ]
 }
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 2
@@ -217,6 +219,22 @@ anims/load_gun = SubResource( 7 )
 anims/machine_gun = SubResource( 8 )
 anims/no_gun = SubResource( 2 )
 blend_times = [  ]
+
+[node name="WeaponScope" type="Position2D" parent="." index="5"]
+
+_sections_unfolded = [ "Transform" ]
+
+[node name="Scope" type="Sprite" parent="WeaponScope" index="0"]
+
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 12 )
+_sections_unfolded = [ "Region", "Transform" ]
+
+[node name="Dot" type="Sprite" parent="WeaponScope" index="1"]
+
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 13 )
+_sections_unfolded = [ "Transform" ]
 
 [connection signal="timeout" from="BodyPivot/WeaponPosition/CoolDownLoadTimer" to="BodyPivot/WeaponPosition" method="_on_CoolDownLoadTimer_timeout"]
 

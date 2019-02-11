@@ -4,6 +4,8 @@ extends "res://player/body_movement/states/state.gd"
 func update_look_direction(new_direction):
 	var body_pivot = owner.get_node("BodyPivot")
 	var player_collision_shape = owner.get_node("CollisionShape2D")
+	var scope = owner.get_node("WeaponScope")
+	scope.global_position = new_direction
 	player_collision_shape.look_at(new_direction)
 	body_pivot.look_at(new_direction)
 	owner.look_direction = (new_direction - body_pivot.global_position).normalized()
