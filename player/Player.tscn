@@ -131,7 +131,7 @@ tracks/0/keys = {
 "values": [ ExtResource( 11 ) ]
 }
 
-[node name="Player" type="KinematicBody2D" index="0"]
+[node name="Player" type="KinematicBody2D"]
 
 input_pickable = false
 collision_layer = 2
@@ -155,21 +155,28 @@ _sections_unfolded = [ "Animation", "Transform" ]
 
 [node name="WeaponPosition" type="Position2D" parent="BodyPivot" index="1"]
 
-editor/display_folded = true
 script = ExtResource( 3 )
+current_gun = "hand_gun"
 
 [node name="CoolDownTimer" type="Timer" parent="BodyPivot/WeaponPosition" index="0"]
 
 process_mode = 1
 wait_time = 1.0
-one_shot = false
+one_shot = true
 autostart = false
 
 [node name="CoolDownLoadTimer" type="Timer" parent="BodyPivot/WeaponPosition" index="1"]
 
 process_mode = 1
 wait_time = 1.0
-one_shot = false
+one_shot = true
+autostart = false
+
+[node name="Timer" type="Timer" parent="BodyPivot/WeaponPosition" index="2"]
+
+process_mode = 1
+wait_time = 0.25
+one_shot = true
 autostart = false
 
 [node name="CameraPivot" type="Position2D" parent="." index="1"]
@@ -210,5 +217,7 @@ anims/load_gun = SubResource( 7 )
 anims/machine_gun = SubResource( 8 )
 anims/no_gun = SubResource( 2 )
 blend_times = [  ]
+
+[connection signal="timeout" from="BodyPivot/WeaponPosition/CoolDownLoadTimer" to="BodyPivot/WeaponPosition" method="_on_CoolDownLoadTimer_timeout"]
 
 

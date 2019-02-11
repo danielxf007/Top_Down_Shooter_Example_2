@@ -7,9 +7,9 @@
 custom_solver_bias = 0.0
 radius = 6.67304
 
-[node name="HandGunBullet" index="0" instance=ExtResource( 1 )]
+[node name="HandGunBullet" instance=ExtResource( 1 )]
 
-speed = 300.0
+speed = 600.0
 push_force = 400.0
 damage = 3
 

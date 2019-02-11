@@ -9,7 +9,7 @@ radius = 6.01225
 
 [node name="MachineGunBullet" index="0" instance=ExtResource( 1 )]
 
-speed = 500.0
+speed = 700.0
 push_force = 300.0
 damage = 2
 

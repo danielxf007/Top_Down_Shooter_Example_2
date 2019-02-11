@@ -24,4 +24,3 @@ func is_outside_view_bounds():
 
 func set_look_direction(new_direction):
 	look_direction = new_direction
-	look_at(new_direction)
