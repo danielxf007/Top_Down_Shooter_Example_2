@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://enemies/enemy.gd" type="Script" id=1]
-[ext_resource path="res://enemies/body_movement/state_machine/enemy_body_state_machine.gd" type="Script" id=2]
-[ext_resource path="res://enemies/body_movement/states/motion/on_ground/idle.gd" type="Script" id=3]
-[ext_resource path="res://enemies/body_movement/states/motion/on_ground/move.gd" type="Script" id=4]
+[ext_resource path="res://enemies/brain/state_machine/enemy_brain.gd" type="Script" id=2]
+[ext_resource path="res://enemies/brain/states/behaviours/patrol.gd" type="Script" id=3]
+[ext_resource path="res://enemies/brain/states/behaviours/attack.gd" type="Script" id=4]
+[ext_resource path="res://enemies/body_movement/state_machine/enemy_body_state_machine.gd" type="Script" id=5]
+[ext_resource path="res://enemies/body_movement/states/motion/on_ground/idle.gd" type="Script" id=6]
+[ext_resource path="res://enemies/body_movement/states/motion/on_ground/move.gd" type="Script" id=7]
+[ext_resource path="res://enemies/eyes/eyes.gd" type="Script" id=8]
 
 [node name="Enemy" type="KinematicBody2D" index="0"]
 
@@ -56,19 +60,30 @@ collision_mask = 1
 
 [node name="Brain" type="Node" parent="." index="7"]
 
-[node name="BodyStateMachine" type="Node" parent="." index="8"]
-
 script = ExtResource( 2 )
 initial_state = null
 
-[node name="Idle" type="Node" parent="BodyStateMachine" index="0"]
+[node name="Patrol" type="Node" parent="Brain" index="0"]
 
 script = ExtResource( 3 )
+
+[node name="Attack" type="Node" parent="Brain" index="1"]
+
+script = ExtResource( 4 )
+
+[node name="BodyStateMachine" type="Node" parent="." index="8"]
+
+script = ExtResource( 5 )
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="BodyStateMachine" index="0"]
+
+script = ExtResource( 6 )
 move_force = 0.0
 
 [node name="Move" type="Node" parent="BodyStateMachine" index="1"]
 
-script = ExtResource( 4 )
+script = ExtResource( 7 )
 move_force = 0.0
 
 [node name="Visibility" type="Area2D" parent="." index="9"]
@@ -84,6 +99,8 @@ audio_bus_name = "Master"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Visibility" index="0"]
 
 [node name="Eyes" type="Node" parent="." index="10"]
+
+script = ExtResource( 8 )
 
 [node name="DamageZone" type="Area2D" parent="." index="11"]
 
@@ -114,5 +131,11 @@ one_shot = false
 autostart = false
 
 [node name="Health" type="Node" parent="." index="13"]
+
+[connection signal="body_entered" from="Visibility" to="Eyes" method="_on_Visibility_body_entered"]
+
+[connection signal="body_exited" from="Visibility" to="Eyes" method="_on_Visibility_body_exited"]
+
+[connection signal="body_entered" from="DamageZone" to="." method="_on_DamageZone_body_entered"]
 
 

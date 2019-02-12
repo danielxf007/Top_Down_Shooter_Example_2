@@ -24,3 +24,6 @@ func set_move_direction(direction):
 
 func get_move_direction():
 	return move_direction
+
+func _on_DamageZone_body_entered(body):
+	pass # replace with function body

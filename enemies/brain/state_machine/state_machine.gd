@@ -28,6 +28,8 @@ func set_active(value):
 		states_stack = []
 		current_state = null
 
+func _physics_process(delta):
+	current_state.move_body(delta)
 
 func _change_state(state_name):
 	if not _active:

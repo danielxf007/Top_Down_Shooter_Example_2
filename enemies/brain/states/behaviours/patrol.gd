@@ -1,15 +1,33 @@
 extends "res://enemies/brain/states/state.gd"
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
+var body_movement
+var detect_wall_up
+var detect_wall_left
+var detect_wall_down
+var detect_wall_right
+var body_movement_state
 
-func _ready():
-	# Called when the node is added to the scene for the first time.
-	# Initialization here
-	pass
+func enter():
+	set_owner(get_parent().get_parent())
+	body_movement = owner.get_node("BodyStateMachine")
+	detect_wall_up = owner.get_node("DetectWallUp")
+	detect_wall_left = owner.get_node("DetectWallLeft")
+	detect_wall_down = owner.get_node("DetectWallDown")
+	detect_wall_right = owner.get_node("DetectWallRight")
 
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+func exit():
+	body_movement_state = null
+
+
+func update(state_name):
+	emit_signal("finished", state_name)
+
+func move_body(delta):
+	return
+
+func handle_animation(ani_name):
+	return
+
+func _on_animation_finished(anim_name):
+	return
+
