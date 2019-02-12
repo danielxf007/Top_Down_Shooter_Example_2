@@ -44,8 +44,10 @@ func _input(event):
 	if event.is_action_pressed("shoot"):
 		if current_gun != "no_gun":
 			var mouse_pos = owner.get_global_mouse_position()
-			var shoot_drection = (mouse_pos - global_position).normalized()
-			shoot(shoot_drection)
+			var shoot_radius = (mouse_pos - owner.global_position).length()
+			if shoot_radius >= owner.shoot_min_radius:
+				var shoot_drection = (mouse_pos - global_position).normalized()
+				shoot(shoot_drection)
 	if event.is_action_pressed("reload"):
 		if current_gun != "no_gun":
 			reload()

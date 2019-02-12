@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+export(float) var shoot_min_radius = 100
 var look_direction
 var move_direction
 var animation = "hand_gun" setget set_animation
