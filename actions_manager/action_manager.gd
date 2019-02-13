@@ -6,20 +6,33 @@ var actions_queue = []
 # The currently executing actions
 var active = []
 
-# The current time, a simple counter in this case
-var current_time = 0.0
+var manage_actions = false
+
+func _ready():
+	for child in get_children():
+		schedule_action(child)
 
 # Adds an action to the queue
 func schedule_action(action):
 	actions_queue.push_back(action)
-	sort_by_priority(actions_queue)
+
+func _physics_process(delta):
+	if manage_actions:
+		add_actions_to_active()
+		execute()
 
 # Processes the manager
-func execute(delta):
-	# Update the time
-	current_time += delta
-	
-	# Go through the queue to find interrupters 
+func execute():
+	# Processes the active set
+	for active_action in copy(active):
+		# Remove completed actions 
+		if active_action.is_complete():
+			active.remove(active_action)
+			actions_queue.push_back(active_action)
+		# Execute others
+		else:
+			active_action.execute()
+"""Go through the queue to find interrupters 
 	for action in actions_queue:
 		# If we drop below active priority, give up
 		if action.priority <= active.get_highest_priority():
@@ -27,30 +40,7 @@ func execute(delta):
 		# If we have an interrupter, interrupt
 		if action.can_interrupt():
 			active.clear()
-			active = [action]
-	
-	# Try to add  as many actions to active set as possible
-	for action in copy(actions_queue):
-		# Check if the action has timed out
-		if action.expiry_time <= current_time:
-			# Remove it from the action queue
-			actions_queue.remove(action)
-			# Check if we can combine
-			for active_action in active:
-				if not action.can_do_both(active_action):
-					break
-				else:
-					actions_queue.remove(action)
-					active.append(action)
-	sort_by_priority(active)
-	# Processes the active set
-	for active_action in copy(active):
-		# Remove completed actions 
-		if active_action.is_complete():
-			active.remove(active_action)
-		# Execute others
-		else:
-			active_action.execute()
+			active = [action]"""
 
 func copy(object):
 	var copy = []
@@ -58,5 +48,26 @@ func copy(object):
 		copy.push_back(element)
 	return copy
 
+func add_actions_to_active():
+	# Try to add  as many actions to active set as possible
+	for action in copy(actions_queue):
+		# Check if the action has timed out
+		if not action.doing_action:
+			# Remove it from the action queue
+			actions_queue.remove(action)
+			# Check if we can combine
+			for active_action in copy(active):
+				if not action.can_do_both(active_action):
+					break
+				else:
+					actions_queue.remove(action)
+					active.append(action)
+
 func sort_by_priority(actions):
 	return
+
+func _on_Eyes_player_entered():
+	manage_actions = true
+
+func _on_Eyes_player_exited():
+	manage_actions = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://enemies/enemy.gd" type="Script" id=1]
 [ext_resource path="res://enemies/brain/state_machine/enemy_brain.gd" type="Script" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://enemies/body_movement/states/motion/on_ground/idle.gd" type="Script" id=6]
 [ext_resource path="res://enemies/body_movement/states/motion/on_ground/move.gd" type="Script" id=7]
 [ext_resource path="res://enemies/eyes/eyes.gd" type="Script" id=8]
+[ext_resource path="res://actions_manager/action_manager.gd" type="Script" id=9]
+[ext_resource path="res://enemies/weapons/weapon.gd" type="Script" id=10]
 
 [node name="Enemy" type="KinematicBody2D" index="0"]
 
@@ -16,6 +18,8 @@ collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
+move_direction = Vector2( 1, 0 )
+animation = "hand_gun"
 
 [node name="Body" type="Sprite" parent="." index="0"]
 
@@ -66,6 +70,7 @@ initial_state = null
 [node name="Patrol" type="Node" parent="Brain" index="0"]
 
 script = ExtResource( 3 )
+patrol_idle = false
 
 [node name="Attack" type="Node" parent="Brain" index="1"]
 
@@ -101,8 +106,13 @@ audio_bus_name = "Master"
 [node name="Eyes" type="Node" parent="." index="10"]
 
 script = ExtResource( 8 )
+detect_radius = 100
 
-[node name="DamageZone" type="Area2D" parent="." index="11"]
+[node name="ActionManager" type="Node" parent="." index="11"]
+
+script = ExtResource( 9 )
+
+[node name="DamageZone" type="Area2D" parent="." index="12"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -114,7 +124,10 @@ audio_bus_name = "Master"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageZone" index="0"]
 
-[node name="WeaponPos" type="Position2D" parent="." index="12"]
+[node name="WeaponPos" type="Position2D" parent="." index="13"]
+
+script = ExtResource( 10 )
+current_gun = null
 
 [node name="CoolDownTimer" type="Timer" parent="WeaponPos" index="0"]
 
@@ -130,12 +143,18 @@ wait_time = 1.0
 one_shot = false
 autostart = false
 
-[node name="Health" type="Node" parent="." index="13"]
+[node name="Health" type="Node" parent="." index="14"]
 
 [connection signal="body_entered" from="Visibility" to="Eyes" method="_on_Visibility_body_entered"]
 
 [connection signal="body_exited" from="Visibility" to="Eyes" method="_on_Visibility_body_exited"]
 
+[connection signal="player_entered" from="Eyes" to="ActionManager" method="_on_Eyes_player_entered"]
+
+[connection signal="player_exited" from="Eyes" to="ActionManager" method="_on_Eyes_player_exited"]
+
 [connection signal="body_entered" from="DamageZone" to="." method="_on_DamageZone_body_entered"]
+
+[connection signal="timeout" from="WeaponPos/CoolDownLoadTimer" to="WeaponPos" method="_on_CoolDownLoadTimer_timeout"]
 
 

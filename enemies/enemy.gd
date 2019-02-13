@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
 var look_direction = Vector2() setget set_look_direction, get_look_direction
-var move_direction = Vector2() setget set_move_direction, get_look_direction
-var animation = "hand_gun" setget set_animation
+export(Vector2) var move_direction setget set_move_direction, get_look_direction
+export(String) var animation = "hand_gun" setget set_animation
 
 func set_dead(value):
 	set_process_input(not value)

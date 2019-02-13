@@ -8,7 +8,9 @@
 custom_solver_bias = 0.0
 extents = Vector2( 32.0983, 30.7983 )
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" index="0" groups=[
+"world",
+]]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." index="0"]
 
@@ -36,6 +38,5 @@ shape = SubResource( 1 )
 [node name="Player" parent="." index="1" instance=ExtResource( 2 )]
 
 position = Vector2( 507.069, 309.053 )
-shoot_min_radius = 100
 
 

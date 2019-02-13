@@ -1,12 +1,15 @@
 extends Node
 
-export(float) var expiry_time
 export(int) var priority
+var doing_action = false
 
 func can_interrupt():
 	return
 
 func can_do_both(other_action):
+	return
+
+func start_action():
 	return
 
 func execute():
