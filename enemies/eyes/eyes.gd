@@ -1,6 +1,7 @@
-extends Node
-signal player_entered()
-signal player_exited()
+extends Node2D
+
+signal player_entered(player)
+signal player_exited(player)
 export (int) var detect_radius = 100
 var vis_color = Color(.867, .91, .247, 0.1)
 var laser_color = Color(1.0, .329, .298)
@@ -20,12 +21,14 @@ func _on_Visibility_body_entered(body):
 	target = body
 	var brain = owner.get_node("Brain")
 	brain._change_state("Attack")
-	emit_signal("player_entered")
+	emit_signal("player_entered", body)
 
+func _draw():
+	draw_circle(Vector2(), detect_radius, vis_color)
 
 func _on_Visibility_body_exited(body):
 	if body == target:
 		target = null
 		var brain = owner.get_node("Brain")
 		brain._change_state("Patrol")
-		emit_signal("player_exited")
+		emit_signal("player_exited", body)

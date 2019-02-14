@@ -11,14 +11,17 @@ var manage_actions = false
 func _ready():
 	for child in get_children():
 		schedule_action(child)
+		schedule_move_active_actions(child)
 
 # Adds an action to the queue
 func schedule_action(action):
 	actions_queue.push_back(action)
 
+func schedule_move_active_actions(action):
+	active.push_back(action)
+
 func _physics_process(delta):
 	if manage_actions:
-		add_actions_to_active()
 		execute()
 
 # Processes the manager
@@ -65,9 +68,3 @@ func add_actions_to_active():
 
 func sort_by_priority(actions):
 	return
-
-func _on_Eyes_player_entered():
-	manage_actions = true
-
-func _on_Eyes_player_exited():
-	manage_actions = false

@@ -8,10 +8,10 @@ func update_move_direction(new_direction):
 	return
 
 func get_look_direction():
-	return 
+	return owner.get_look_direction()
 
 func get_move_direction():
-	return
+	return owner.get_move_direction()
 
 func handle_animation(ani_name):
 	owner.get_node("AnimationPlayer").play(ani_name)

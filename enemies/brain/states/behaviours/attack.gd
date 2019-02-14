@@ -14,6 +14,8 @@ func enter():
 	detect_wall_left = owner.get_node("DetectWallLeft")
 	detect_wall_down = owner.get_node("DetectWallDown")
 	detect_wall_right = owner.get_node("DetectWallRight")
+	body_movement_state = body_movement.current_state
+	print(body_movement_state.name)
 
 func exit():
 	body_movement_state = null
@@ -22,7 +24,7 @@ func update(state_name):
 	emit_signal("finished", state_name)
 
 func move_body(delta):
-	return
+	body_movement_state.update(delta)
 
 func handle_animation(ani_name):
 	return

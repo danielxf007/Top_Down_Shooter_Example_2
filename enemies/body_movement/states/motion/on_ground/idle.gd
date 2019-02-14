@@ -4,8 +4,6 @@ func enter():
 	handle_animation(owner.animation)
 
 func update(delta):
-	var look_direction = get_look_position()
-	update_look_direction(look_direction)
 	var move_direction = get_move_direction()
 	if is_moving(move_direction):
 		emit_signal("finished", "Move")
