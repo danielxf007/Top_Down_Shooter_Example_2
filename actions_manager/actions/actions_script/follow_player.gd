@@ -21,7 +21,8 @@ func start_action():
 	return
 
 func execute():
-	update_target()
+	if target == null:
+		update_target()
 	target_pos = target.global_position
 	update_look_direction(target_pos)
 	owner_pos = owner.global_position
