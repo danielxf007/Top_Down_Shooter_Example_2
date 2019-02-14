@@ -15,7 +15,6 @@ func enter():
 	detect_wall_down = owner.get_node("DetectWallDown")
 	detect_wall_right = owner.get_node("DetectWallRight")
 	body_movement_state = body_movement.current_state
-	print(body_movement_state.name)
 
 func exit():
 	body_movement_state = null

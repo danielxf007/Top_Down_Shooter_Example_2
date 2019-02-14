@@ -15,6 +15,12 @@ func enter():
 	detect_wall_left = owner.get_node("DetectWallLeft")
 	detect_wall_down = owner.get_node("DetectWallDown")
 	detect_wall_right = owner.get_node("DetectWallRight")
+	var movement
+	if patrol_idle:
+		movement = "Idle"
+	else:
+		movement = "Move"
+	body_movement._change_state(movement)
 	body_movement_state = body_movement.current_state
 
 
@@ -31,10 +37,16 @@ func move_body(delta):
 	body_movement_state.update(delta)
 
 func handle_movement_direction():
+	var move_dir
 	if detect_wall_right.is_colliding() or detect_wall_up.is_colliding():
-		owner.set_move_direction(owner.move_direction * -1)
+		move_dir = owner.get_move_direction() * -1
+		owner.set_move_direction(move_dir)
+		owner.look_at(owner.global_position + move_dir)
 	if detect_wall_left.is_colliding() or detect_wall_down.is_colliding():
-		owner.set_move_direction(owner.move_direction * -1)
+		move_dir = owner.get_move_direction() * -1
+		owner.set_move_direction(move_dir)
+		owner.look_at(owner.global_position + move_dir)
+	
 func handle_animation(ani_name):
 	return
 

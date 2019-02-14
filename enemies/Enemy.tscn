@@ -130,7 +130,7 @@ tracks/0/keys = {
 "values": [ ExtResource( 7 ) ]
 }
 
-[node name="Enemy" type="KinematicBody2D"]
+[node name="Enemy" type="KinematicBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 4
