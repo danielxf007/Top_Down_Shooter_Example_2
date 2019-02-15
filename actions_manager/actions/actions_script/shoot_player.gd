@@ -27,6 +27,7 @@ func execute():
 		update_target()
 	if can_shoot:
 		target_pos = target.global_position
+		update_look_direction(target_pos)
 		weapon_pos = weapon.global_position
 		var shoot_direction = (target_pos - weapon_pos).normalized()
 		weapon.shoot(shoot_direction)
@@ -48,3 +49,6 @@ func _on_WeaponPos_weapon_loaded():
 
 func update_target():
 	target = parent.target
+
+func update_look_direction(target_pos):
+	owner.look_at(target_pos)
