@@ -174,15 +174,13 @@ script = ExtResource( 8 )
 
 [node name="FollowPlayer" parent="ActionManager" index="0" instance=ExtResource( 9 )]
 
-include_action = false
-
 [node name="LookAtPlayer" parent="ActionManager" index="1" instance=ExtResource( 10 )]
-
-include_action = false
 
 [node name="ShootPlayer" parent="ActionManager" index="2" instance=ExtResource( 11 )]
 
-include_action = false
+[connection signal="got_target" from="Eyes" to="ActionManager" method="_on_Eyes_got_target"]
+
+[connection signal="not_got_target" from="Eyes" to="ActionManager" method="_on_Eyes_not_got_target"]
 
 [connection signal="ran_out_of_bullets" from="WeaponPos" to="ActionManager/ShootPlayer" method="_on_WeaponPos_ran_out_of_bullets"]
 

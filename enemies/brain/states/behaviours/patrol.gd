@@ -51,7 +51,7 @@ func handle_movement_direction():
 		move_dir = owner.get_move_direction() * -1
 		owner.set_move_direction(move_dir)
 		owner.look_at(owner.global_position + move_dir)
-	
+
 func handle_animation(ani_name):
 	return
 

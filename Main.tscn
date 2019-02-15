@@ -88,9 +88,9 @@ current_gun = "machine_gun"
 
 position = Vector2( 507.069, 309.053 )
 
-[connection signal="player_entered" from="Zombie/Eyes" to="Zombie/ActionManager" method="_on_Eyes_player_entered"]
+[connection signal="got_target" from="Zombie/Eyes" to="Zombie/ActionManager" method="_on_Eyes_got_target"]
 
-[connection signal="player_exited" from="Zombie/Eyes" to="Zombie/ActionManager" method="_on_Eyes_player_exited"]
+[connection signal="not_got_target" from="Zombie/Eyes" to="Zombie/ActionManager" method="_on_Eyes_not_got_target"]
 
 
 [editable path="Zombie"]

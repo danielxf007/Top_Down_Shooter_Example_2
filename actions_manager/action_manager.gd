@@ -13,7 +13,6 @@ func _ready():
 		if child.include_action:
 			schedule_action(child)
 			schedule_move_active_actions(child)
-
 # Adds an action to the queue
 func schedule_action(action):
 	actions_queue.push_back(action)
