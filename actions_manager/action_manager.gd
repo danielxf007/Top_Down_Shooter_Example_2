@@ -10,8 +10,9 @@ var manage_actions = false
 
 func _ready():
 	for child in get_children():
-		schedule_action(child)
-		schedule_move_active_actions(child)
+		if child.include_action:
+			schedule_action(child)
+			schedule_move_active_actions(child)
 
 # Adds an action to the queue
 func schedule_action(action):

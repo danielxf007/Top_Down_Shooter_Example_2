@@ -1,6 +1,7 @@
 extends "res://enemies/brain/states/state.gd"
 
 export(bool) var patrol_idle = false
+export(Vector2) var patrol_direction = Vector2(1, 0) setget set_patrol_direction, get_patrol_direction
 var body_movement
 var detect_wall_up
 var detect_wall_left
@@ -15,6 +16,10 @@ func enter():
 	detect_wall_left = owner.get_node("DetectWallLeft")
 	detect_wall_down = owner.get_node("DetectWallDown")
 	detect_wall_right = owner.get_node("DetectWallRight")
+	var patrol_dic = get_patrol_direction()
+	owner.set_move_direction(patrol_dic)
+	owner.set_look_direction(patrol_dic)
+	owner.look_at(owner.global_position + owner.get_look_direction())
 	var movement
 	if patrol_idle:
 		movement = "Idle"
@@ -53,3 +58,8 @@ func handle_animation(ani_name):
 func _on_animation_finished(anim_name):
 	return
 
+func set_patrol_direction(direction):
+	patrol_direction = direction
+
+func get_patrol_direction():
+	return patrol_direction

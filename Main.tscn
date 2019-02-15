@@ -62,9 +62,35 @@ shape = SubResource( 1 )
 [node name="Zombie" parent="." index="2" instance=ExtResource( 2 )]
 
 position = Vector2( 511.081, 37.2036 )
+animation = "machine_gun"
+
+[node name="DetectWallRight" parent="Zombie" index="3"]
+
+cast_to = Vector2( 35, 0 )
+
+[node name="DetectWallLeft" parent="Zombie" index="4"]
+
+cast_to = Vector2( -35, 0 )
+
+[node name="DetectWallUp" parent="Zombie" index="5"]
+
+cast_to = Vector2( 0, -35 )
+
+[node name="DetectWallDown" parent="Zombie" index="6"]
+
+cast_to = Vector2( 0, 35 )
+
+[node name="WeaponPos" parent="Zombie" index="11"]
+
+current_gun = "machine_gun"
 
 [node name="Player" parent="." index="3" instance=ExtResource( 3 )]
 
 position = Vector2( 507.069, 309.053 )
 
+[connection signal="player_entered" from="Zombie/Eyes" to="Zombie/ActionManager" method="_on_Eyes_player_entered"]
 
+[connection signal="player_exited" from="Zombie/Eyes" to="Zombie/ActionManager" method="_on_Eyes_player_exited"]
+
+
+[editable path="Zombie"]

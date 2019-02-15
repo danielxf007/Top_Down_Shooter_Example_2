@@ -6,9 +6,13 @@ var parent
 var can_shoot = true
 var target
 var target_pos
+var body_state_machine
 
 func _ready():
 	weapon = owner.get_node("WeaponPos")
+	body_state_machine = owner.get_node("BodyStateMachine")
+	body_state_machine._change_state("Idle")
+	owner.set_move_direction(Vector2())
 	parent = get_parent()
 	target = parent.target
 	doing_action = true
