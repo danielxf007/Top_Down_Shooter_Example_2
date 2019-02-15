@@ -1,6 +1,7 @@
 extends Node
 
 export(int) var priority
+export(bool) var include_action = true
 var doing_action = false
 
 func can_interrupt():
