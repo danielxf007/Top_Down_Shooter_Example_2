@@ -1,6 +1,8 @@
 extends Position2D
 
 signal weapon_changed(weapon_name)
+signal ran_out_of_bullets()
+signal weapon_loaded()
 
 var type_of_bullets = {"hand_gun": preload("res://bullets/HandGunBullet.tscn"),
 "machine_gun" : preload("res://bullets/MachineGunBullet.tscn"), 
@@ -38,6 +40,8 @@ func shoot(direction):
 	new_bullet.set_look_direction(direction)
 	new_bullet.add_collision_exception_with(owner)
 	world.add_child(new_bullet)
+	if current_bullets_in_carriage[current_gun] <= 0:
+		emit_signal("ran_out_of_bullets")
 
 func reload():
 	$CoolDownLoadTimer.start()
@@ -46,3 +50,4 @@ func reload():
 
 func _on_CoolDownLoadTimer_timeout():
 	anim_player.play(current_gun)
+	emit_signal("weapon_loaded")
