@@ -7,8 +7,8 @@
 [ext_resource path="res://enemies/brain/state_machine/enemy_brain.gd" type="Script" id=5]
 [ext_resource path="res://enemies/brain/states/behaviours/patrol.gd" type="Script" id=6]
 [ext_resource path="res://enemies/brain/states/behaviours/attack.gd" type="Script" id=7]
-[ext_resource path="res://enemies/eyes/eyes.gd" type="Script" id=8]
-[ext_resource path="res://enemies/weapons/weapon.gd" type="Script" id=9]
+[ext_resource path="res://enemies/weapons/weapon.gd" type="Script" id=8]
+[ext_resource path="res://enemies/eyes/eyes.gd" type="Script" id=9]
 
 [node name="Enemy" type="KinematicBody2D"]
 
@@ -18,6 +18,9 @@ collision_mask = 19
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision" ]
+__meta__ = {
+"_edit_group_": true
+}
 move_direction = Vector2( 1, 0 )
 animation = "hand_gun"
 
@@ -92,30 +95,10 @@ patrol_direction = Vector2( 1, 0 )
 
 script = ExtResource( 7 )
 
-[node name="Visibility" type="Area2D" parent="." index="9"]
-
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-collision_layer = 8
-collision_mask = 2
-audio_bus_override = false
-audio_bus_name = "Master"
-_sections_unfolded = [ "Collision" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Visibility" index="0"]
-
-[node name="Eyes" type="Node2D" parent="." index="10"]
-
-script = ExtResource( 8 )
-detect_radius = 100
-
-[node name="WeaponPos" type="Position2D" parent="." index="11"]
+[node name="WeaponPos" type="Position2D" parent="." index="9"]
 
 position = Vector2( 0, -1 )
-script = ExtResource( 9 )
+script = ExtResource( 8 )
 current_gun = null
 
 [node name="CoolDownTimer" type="Timer" parent="WeaponPos" index="0"]
@@ -132,9 +115,7 @@ wait_time = 1.0
 one_shot = false
 autostart = false
 
-[node name="ActionManager" type="Node" parent="." index="12"]
-
-[node name="DamageZone" type="Area2D" parent="." index="13"]
+[node name="DamageZone" type="Area2D" parent="." index="10"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -149,14 +130,37 @@ _sections_unfolded = [ "Collision" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageZone" index="0"]
 
+[node name="Eyes" type="Node2D" parent="." index="11"]
+
+position = Vector2( 0, 1 )
+script = ExtResource( 9 )
+detect_radius = 100
+
+[node name="Visibility" type="Area2D" parent="." index="12"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 8
+collision_mask = 2
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Visibility" index="0"]
+
+[node name="ActionManager" type="Node" parent="." index="13"]
+
 [node name="Health" type="Node" parent="." index="14"]
-
-[connection signal="body_entered" from="Visibility" to="Eyes" method="_on_Visibility_body_entered"]
-
-[connection signal="body_exited" from="Visibility" to="Eyes" method="_on_Visibility_body_exited"]
 
 [connection signal="timeout" from="WeaponPos/CoolDownLoadTimer" to="WeaponPos" method="_on_CoolDownLoadTimer_timeout"]
 
 [connection signal="body_entered" from="DamageZone" to="." method="_on_DamageZone_body_entered"]
+
+[connection signal="body_entered" from="Visibility" to="Eyes" method="_on_Visibility_body_entered"]
+
+[connection signal="body_exited" from="Visibility" to="Eyes" method="_on_Visibility_body_exited"]
 
 

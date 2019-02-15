@@ -6,12 +6,11 @@ var target_pos
 var owner_pos
 var body_state_machine
 func _ready():
-	pass
-"""	parent = get_parent()
+	parent = get_parent()
 	body_state_machine = owner.get_node("BodyStateMachine")
 	body_state_machine._change_state("Idle")
 	target = parent.target
-	doing_action = true"""
+	doing_action = true
 
 func can_interrupt():
 	return false

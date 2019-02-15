@@ -156,7 +156,7 @@ anims/no_gun = SubResource( 7 )
 
 move_force = 300.0
 
-[node name="WeaponPos" parent="." index="11"]
+[node name="WeaponPos" parent="." index="9"]
 
 current_gun = "hand_gun"
 
@@ -168,7 +168,7 @@ one_shot = true
 
 one_shot = true
 
-[node name="ActionManager" parent="." index="12"]
+[node name="ActionManager" parent="." index="13"]
 
 script = ExtResource( 8 )
 
@@ -176,14 +176,16 @@ script = ExtResource( 8 )
 
 [node name="LookAtPlayer" parent="ActionManager" index="1" instance=ExtResource( 10 )]
 
+include_action = true
+
 [node name="ShootPlayer" parent="ActionManager" index="2" instance=ExtResource( 11 )]
-
-[connection signal="got_target" from="Eyes" to="ActionManager" method="_on_Eyes_got_target"]
-
-[connection signal="not_got_target" from="Eyes" to="ActionManager" method="_on_Eyes_not_got_target"]
 
 [connection signal="ran_out_of_bullets" from="WeaponPos" to="ActionManager/ShootPlayer" method="_on_WeaponPos_ran_out_of_bullets"]
 
 [connection signal="weapon_loaded" from="WeaponPos" to="ActionManager/ShootPlayer" method="_on_WeaponPos_weapon_loaded"]
+
+[connection signal="got_target" from="Eyes" to="ActionManager" method="_on_Eyes_got_target"]
+
+[connection signal="not_got_target" from="Eyes" to="ActionManager" method="_on_Eyes_not_got_target"]
 
 
