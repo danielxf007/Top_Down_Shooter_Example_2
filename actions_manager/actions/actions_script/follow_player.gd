@@ -35,6 +35,7 @@ func is_complete():
 
 func update_look_direction(target_pos):
 	owner.look_at(target_pos)
+
 func _on_ExecutionTimer_timeout():
 	return
 
