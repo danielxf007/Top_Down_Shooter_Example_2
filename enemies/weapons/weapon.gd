@@ -25,6 +25,8 @@ func _ready():
 	anim_player = owner.get_node("AnimationPlayer")
 	for w in get_tree().get_nodes_in_group("world"):
 		world = w
+	$CoolDownTimer.wait_time = cool_down_timers[current_gun]
+	$CoolDownLoadTimer.wait_time = cool_down_load_timers[current_gun]
 
 func shoot(direction):
 	if current_bullets_in_carriage[current_gun] <= 0:
@@ -41,6 +43,7 @@ func shoot(direction):
 	new_bullet.add_collision_exception_with(owner)
 	world.add_child(new_bullet)
 	if current_bullets_in_carriage[current_gun] <= 0:
+		reload()
 		emit_signal("ran_out_of_bullets")
 
 func reload():

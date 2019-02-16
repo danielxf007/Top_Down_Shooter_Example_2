@@ -9,14 +9,12 @@ var target_pos
 var body_state_machine
 
 func _ready():
-	pass
-"""	weapon = owner.get_node("WeaponPos")
+	weapon = owner.get_node("WeaponPos")
 	body_state_machine = owner.get_node("BodyStateMachine")
 	body_state_machine._change_state("Idle")
-	owner.set_move_direction(Vector2())
 	parent = get_parent()
 	target = parent.target
-	doing_action = true"""
+	doing_action = true
 
 func can_interrupt():
 	return false
@@ -28,6 +26,8 @@ func start_action():
 	return
 
 func execute():
+	if owner.get_move_direction() != Vector2():
+		owner.set_move_direction(Vector2())
 	if target == null:
 		update_target()
 	if can_shoot:
@@ -36,8 +36,6 @@ func execute():
 		weapon_pos = weapon.global_position
 		var shoot_direction = (target_pos - weapon_pos).normalized()
 		weapon.shoot(shoot_direction)
-	else:
-		weapon.reload()
 
 func is_complete():
 	return false

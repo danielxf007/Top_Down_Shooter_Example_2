@@ -23,8 +23,20 @@ func update(state_name):
 	emit_signal("finished", state_name)
 
 func move_body(delta):
+	handle_movement_direction()
 	body_movement_state.update(delta)
 
+func handle_movement_direction():
+	var move_dir
+	if detect_wall_right.is_colliding() or detect_wall_up.is_colliding():
+		move_dir = owner.get_move_direction() * -1
+		owner.set_move_direction(move_dir)
+		owner.look_at(owner.global_position + move_dir)
+	if detect_wall_left.is_colliding() or detect_wall_down.is_colliding():
+		move_dir = owner.get_move_direction() * -1
+		owner.set_move_direction(move_dir)
+		owner.look_at(owner.global_position + move_dir)
+		
 func handle_animation(ani_name):
 	return
 

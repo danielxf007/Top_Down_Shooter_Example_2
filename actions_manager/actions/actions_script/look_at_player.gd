@@ -22,6 +22,8 @@ func start_action():
 	return
 
 func execute():
+	if owner.get_move_direction() != Vector2():
+		owner.set_move_direction(Vector2())
 	if target == null:
 		update_target()
 	target_pos = target.global_position

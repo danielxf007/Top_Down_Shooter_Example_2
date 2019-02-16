@@ -9,7 +9,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 32.0983, 30.7983 )
 
-[node name="Main" type="Node" groups=[
+[node name="Main" type="Node" index="0" groups=[
 "world",
 ]]
 
@@ -63,6 +63,7 @@ shape = SubResource( 1 )
 
 position = Vector2( 511.081, 37.2036 )
 animation = "machine_gun"
+can_do_actions = [ "LookAtPlayer" ]
 
 [node name="Player" parent="." index="3" instance=ExtResource( 3 )]
 

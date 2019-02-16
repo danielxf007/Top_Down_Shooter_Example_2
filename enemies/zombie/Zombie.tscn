@@ -134,6 +134,7 @@ tracks/0/keys = {
 [node name="Zombie" index="0" instance=ExtResource( 1 )]
 
 animation = "hold"
+can_do_actions = Vector2( 0, 0 )
 
 [node name="Body" parent="." index="0"]
 
@@ -158,7 +159,7 @@ move_force = 300.0
 
 [node name="WeaponPos" parent="." index="9"]
 
-current_gun = "hand_gun"
+current_gun = "machine_gun"
 
 [node name="CoolDownTimer" parent="WeaponPos" index="0"]
 
@@ -175,8 +176,6 @@ script = ExtResource( 8 )
 [node name="FollowPlayer" parent="ActionManager" index="0" instance=ExtResource( 9 )]
 
 [node name="LookAtPlayer" parent="ActionManager" index="1" instance=ExtResource( 10 )]
-
-include_action = true
 
 [node name="ShootPlayer" parent="ActionManager" index="2" instance=ExtResource( 11 )]
 
